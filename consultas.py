@@ -46,7 +46,7 @@ def clear_file(filename: str):
 
 def write_output(filename: str, result: str):
     with open(filename, "a") as f:
-        f.write(result)
+        f.write(result + "\n")
 
 
 def main():
@@ -60,16 +60,22 @@ def main():
             params = line_list[1:]
 
             if consulta == "MAX_VIB_RANGO":
+                #write_output(resultados_file, consulta)
                 max_vib_rango(params)
             elif consulta == "PROM_TEMP":
+                #write_output(resultados_file, consulta)
                 prom_temp(params)
             elif consulta == "PICOS_VIB":
+                #write_output(resultados_file, consulta)
                 picos_vib(params)
             elif consulta == "RANGO_TEMP_TS":
+                #write_output(resultados_file, consulta)
                 rango_temp_ts(params)
             elif consulta == "SENSORES_SECTOR":
+                #write_output(resultados_file, consulta)
                 sensores_sector(params)
             elif consulta == "SIGUIENTE_MEDICION":
+                #write_output(resultados_file, consulta)
                 siguiente_medicion(params)  
             
 

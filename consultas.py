@@ -3,7 +3,7 @@ import json
 import pickle
 import time
 
-DATA_TYPE = "pkl"         # Cambiar json/pkl para probar ambos
+DATA_TYPE = "json"         # Cambiar json/pkl para probar ambos
 DATOS_FILE = "datos/datos." + DATA_TYPE
 
 def max_vib_rango(params: list, out_file, datos):
@@ -115,30 +115,30 @@ handlers = {
 }
 
 def main():
-    inicio = time.perf_counter()
+    inicio = time.time()
 
     consultas_file = sys.argv[1]
     resultados_file = sys.argv[2]
 
     datos = open_data(DATOS_FILE)
 
-    for _ in range(50):
-        clear_file(resultados_file)
+    
+    clear_file(resultados_file)
 
-        with open(resultados_file, "w") as out:
-            with open(consultas_file, "r") as f:
-                for line in f:
-                    line_list = line.strip().split(" ")
-                    consulta = line_list[0]
-                    params = line_list[1:]
+    with open(resultados_file, "w") as out:
+        with open(consultas_file, "r") as f:
+            for line in f:
+                line_list = line.strip().split(" ")
+                consulta = line_list[0]
+                params = line_list[1:]
 
-                    handler = handlers.get(consulta)
-                    if handler:
-                        handler(params, out, datos) 
+                handler = handlers.get(consulta)
+                if handler:
+                    handler(params, out, datos) 
             
-    fin = time.perf_counter()
-    tiempo_promedio = (fin - inicio) / 50
-    print(f"Tiempo usando {DATA_TYPE}: {tiempo_promedio * 1e3:.6f} milisegundos")
+    fin = time.time()
+
+    print(f"Tiempo usando {DATA_TYPE}: {(fin - inicio) * 1e3:.6f} milisegundos")
 
 if __name__ == "__main__":
     main()
